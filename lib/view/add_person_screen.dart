@@ -17,8 +17,16 @@ class AddPersonScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
-        leading: Icon(Icons.arrow_back_outlined),
+        leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(Icons.arrow_back_outlined)),
         title: Text("Add Person"),
+        //  actions: [IconButton(onPressed: () {
+        //   Get.changeTheme(appController.temaDegistir());
+
+        // }, icon: Icon(Icons.light_mode_sharp), iconSize: 20,)],
       ),
       body: Container(
         width: double.infinity,
@@ -50,20 +58,27 @@ class AddPersonScreen extends StatelessWidget {
                   hintText: "Enter your e-mail"),
             ),
             const SizedBox(height: 10),
-            MaterialButton(
-                onPressed: () {
-                  GuideModel model = GuideModel(
-                      name: nameController.text,
-                      number: numberController.text,
-                      email: emailController.text);
-                  appController.addGuide(model);
-                },
-                child: Text(
-                  "Add",
-                  style: TextStyle(color: Colors.white),
-                ),
-                color: Colors.deepPurple,
-                minWidth: 200),
+            InkWell(
+              onTap: () {
+                GuideModel model = GuideModel(
+                    name: nameController.text,
+                    number: numberController.text,
+                    email: emailController.text);
+                appController.addGuide(model);
+              },
+              child: Container(
+                  alignment: Alignment.center,
+                  width: 150,
+                  height: 30,
+                  decoration: BoxDecoration(
+                      color: Colors.deepPurple,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Text(
+                    "Add",
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w600),
+                  )),
+            ),
           ],
         ),
       ),
